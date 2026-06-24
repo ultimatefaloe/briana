@@ -27,3 +27,10 @@
 .nav-links a:hover {
   text-decoration: underline;
 }
+
+
+nav ul li{
+  display: inline-block;
+  list-style: none;
+
+}
