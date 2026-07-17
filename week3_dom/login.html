@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+
+     <div id="navigation">Loading....</div>
+
+    <div class="flex flex-col justify-center align-center text-center">
+      <h1 class="text-2xl p-4">Login</h1>
+      <form action="" class="p-9 rounded bg-blue-300 max-width-4xl" id="login_form">
+        <div class="p-2 flex flex-col gap-2">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            value=""
+            placeholder="Enter username..."
+            class="border-blue-600 rounded outline outline-blue-600 px-4 py-2"
+          />
+        </div>
+        <div class="p-2 flex flex-col gap-2">
+          <label for="passowrd">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            value=""
+            placeholder="*******"
+            class="border-blue-600 rounded outline outline-blue-600 px-4 py-2"
+          />
+        </div>
+
+        <button type="submit" class="px-6 py-2 text-white bg-blue-800 rounded cursor-pointer">Login</button>
+      </form>
+    </div>
+
+    <script src="./scripts/form.js"></script>
+    <script src="./scripts/nav.js"></script>
+  </body>
+</html>
