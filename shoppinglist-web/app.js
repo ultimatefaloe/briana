@@ -1,17 +1,68 @@
+// strorage key
+const key = "post:key";
+
+// utilss
+const getLocal = () => {
+  const data = localStorage.getItem(key);
+  if (!data) return [];
+  return JSON.parse(data);
+};
+
+const saveLocal = (data) => {
+  const stringifiedData = JSON.stringify(data);
+  localStorage.setItem(key, stringifiedData);
+};
+
+// api call
+
+// for getting all item save in local storage
+const getItem = () => {
+  return getLocal();
+};
+
+// to create new item and save in local storage
+const createItem = (data) => {
+  const existingData = getLocal();
+  const newData = [...existingData, data];
+  saveLocal(newData);
+  return newData;
+};
+
+// to uodate existing item and save in local storage
+const updateItem = (id, data) => {
+  const existingData = getLocal();
+  const newData = existingData.map((item) => {
+    if (item.id === id) {
+      return { ...item, ...data };
+    }
+    return item;
+  });
+  saveLocal(newData);
+  return newData;
+};
+
+// delete item from local storage
+const deleteItem = (id) => {
+  const existingData = getLocal();
+  const newData = existingData.filter((item) => item.id !== id);
+  saveLocal(newData);
+  return newData;
+};
+
 document.addEventListener("DOMContentLoaded", () => {
-  const items = [];
+  const items = getItem();
 
   const shoppingItemUi = (item) => {
     const { id, title, timestamp } = item;
 
     return `
-      <div class="item bg-gray-300 rounded p-2 flex align-center justify-between">
+      <div class="item bg-gray-300 rounded p-2 flex align-center justify-between" data-id="${id}">
         <div class="">
           <h2>${title}</h2>
           <span class="text-[10px] text-gray-500">${timestamp}</span>
         </div>
         <div class="flex justify-center align-center p-3 leading-tight">
-          <button id="delete-${id}" onclick="">
+          <button class="delete-btn cursor-pointer" data-id="${id}">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1em"
@@ -30,15 +81,41 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const itemContainer = document.getElementById("itemContainer");
+
+  // Render existing items
   items.forEach((item) => {
     itemContainer.innerHTML += shoppingItemUi(item);
   });
 
-  const form = document.getElementById("createList")
+  // Add event listener for delete buttons (event delegation)
+  itemContainer.addEventListener("click", (e) => {
+    const deleteBtn = e.target.closest(".delete-btn");
+    if (deleteBtn) {
+      const id = parseInt(deleteBtn.dataset.id);
+      deleteItem(id);
+    }
+  });
+
+  // Delete function
+  function deleteItem(id) {
+    // Remove from items array
+    const index = items.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      items.splice(index, 1);
+    }
+
+    // Remove from DOM
+    const itemElement = document.querySelector(`.item[data-id="${id}"]`);
+    if (itemElement) {
+      itemElement.remove();
+    }
+  }
+
+  const form = document.getElementById("createList");
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const input = document.getElementById("item");
-    const title = input.value;
+    const title = input.value.trim();
 
     if (title) {
       const newItem = {
@@ -46,25 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
         title,
         timestamp: new Date().toLocaleString(),
       };
-      items.unshift(newItem);
-      itemContainer.innerHTML += shoppingItemUi(newItem);
+      // items.unshift(newItem);
+      createItem(newItem);
+      itemContainer.innerHTML =
+        shoppingItemUi(newItem) + itemContainer.innerHTML;
       input.value = "";
     }
-
   });
-
-  // items.forEach((item) => {
-  //   const deleteButton = document.getElementById(`delete-${item.id}`);
-  //   deleteButton.addEventListener("click", () => {
-  //     itemContainer.removeChild(deleteButton.parentElement.parentElement);
-  //   });
-  // });
-
 });
-
-
-// const fruits = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
-
-// console.log(fruits.map(fruits => fruits.toUpperCase()));
-
-// fruits.forEach(fruit => console.log(fruit));
