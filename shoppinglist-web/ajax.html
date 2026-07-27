@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Shopping List</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav
+      class="flex justify-between align-center py-4 px-10 bg-gray-300 text-black text-bold"
+    >
+      <div class="">
+        <h1><a href="./index.html">Logo</a></h1>
+      </div>
+      <div class="cta">
+        <a
+          href="ajax.html"
+          class="py-1 px-3 bg-gray-400 text-white font-bold rounded"
+        >
+          Ajax
+        </a>
+      </div>
+    </nav>
+
+    <!-- main content -->
+    <main class="flex justify-center">
+      <div class="max-w-6xl bg-gray-100 p-3">
+        <!-- Form for adding tasks -->
+        <form
+          action=""
+          id="createList"
+          class="flex flex-col justify-center align-center py-3 gap-2"
+        >
+          <div class="flex flex-col gap-2">
+            <label for="title" class="text-sm">Title</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Coding..."
+              required
+              class="border border-gray-5 rounded py px-2 w-full"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="body" class="text-sm">Body</label>
+            <input
+              type="text"
+              name="body"
+              id="body"
+              placeholder="Seem boring at first..."
+              required
+              class="border border-gray-5 rounded py px-2 w-full"
+            />
+          </div>
+          <button
+            type="submit"
+            class="flex justify-center items-center border border-red-200 rounded py-2 px-2 w-full bg-red-200 cursor-pointer hover:bg-red-300"
+          >
+            Create Post
+          </button>
+        </form>
+
+        <!-- Item list -->
+        <div class="grid grid-cols-2 justify-center gap-3" id="post_container">
+          <!-- Post card with delete and edit button -->
+          <!-- Post Card -->
+        
+       
+        </div>
+      </div>
+    </main>
+    <!-- <footer></footer> -->
+
+    <script src="./api.js"></script>
+  </body>
+</html>
