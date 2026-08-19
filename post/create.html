@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Create or update a post with PostFlow." />
+    <title>PostFlow | Create Post</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./index.html" aria-label="PostFlow home">
+          <span class="brand-mark">P</span>
+          <span>PostFlow</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a class="nav-link" href="./index.html">All posts</a>
+          <a class="button button-primary" href="./create.html">+ New post</a>
+        </nav>
+      </header>
+
+      <main class="container form-page">
+        <a class="back-link" href="./index.html">← Back to all posts</a>
+
+        <section class="form-layout">
+          <div class="form-intro">
+            <p class="eyebrow">Post editor</p>
+            <h1 id="pageTitle">Create a new post</h1>
+
+            <p id="pageDescription">
+              Add a title, select an author, and write content for your post.
+            </p>
+
+            <div class="editor-tip">
+              <span class="tip-icon">✦</span>
+              <p>
+                JSONPlaceholder simulates API requests. Your submitted post will
+                receive a successful response, but it will not persist remotely.
+              </p>
+            </div>
+          </div>
+
+          <section class="form-card">
+            <div id="formLoading" class="form-loading hidden">
+              <span class="spinner"></span>
+              <p>Loading post details...</p>
+            </div>
+
+            <form id="postForm">
+              <div class="form-group">
+                <label for="userId">Author</label>
+
+                <select id="userId" name="userId" required>
+                  <option value="">Select a user</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="title">Post title</label>
+
+                <input
+                  id="title"
+                  name="title"
+                  type="text"
+                  placeholder="Write a clear, engaging title"
+                  minlength="3"
+                  maxlength="120"
+                  required
+                />
+
+                <span class="input-hint">At least 3 characters</span>
+              </div>
+
+              <div class="form-group">
+                <label for="body">Content</label>
+
+                <textarea
+                  id="body"
+                  name="body"
+                  rows="9"
+                  placeholder="Write your post content here..."
+                  minlength="10"
+                  maxlength="1000"
+                  required
+                ></textarea>
+
+                <div class="field-footer">
+                  <span class="input-hint">At least 10 characters</span>
+                  <span id="characterCount" class="character-count">
+                    0 / 1000
+                  </span>
+                </div>
+              </div>
+
+              <div
+                id="formMessage"
+                class="form-message hidden"
+                role="alert"
+              ></div>
+
+              <div class="form-actions">
+                <a class="button button-secondary" href="./index.html">
+                  Cancel
+                </a>
+
+                <button
+                  id="submitButton"
+                  class="button button-primary"
+                  type="submit"
+                >
+                  Publish post
+                </button>
+              </div>
+            </form>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="A dark-themed post manager powered by JSONPlaceholder."
+  >
+  <title>PostFlow | All Posts</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="PostFlow home">
+        <span class="brand-mark">P</span>
+        <span>PostFlow</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a class="nav-link active" href="./index.html">All posts</a>
+        <a class="button button-primary" href="./create.html">+ New post</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Content dashboard</p>
+          <h1>Manage your posts</h1>
+          <p class="hero-copy">
+            Browse, search, edit, and publish posts using JSONPlaceholder data.
+          </p>
+        </div>
+
+        <div class="stats-card">
+          <span class="stats-label">Loaded posts</span>
+          <strong id="postCount">0</strong>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="Post controls">
+        <label class="search-box" for="searchInput">
+          <span class="search-icon">⌕</span>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search by title or content..."
+            autocomplete="off"
+          >
+        </label>
+
+        <select id="userFilter" class="select-control" aria-label="Filter posts by user">
+          <option value="all">All users</option>
+        </select>
+      </section>
+
+      <section class="content-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Latest content</p>
+            <h2>All posts</h2>
+          </div>
+          <span id="resultText" class="result-text">Loading posts...</span>
+        </div>
+
+        <div id="loadingState" class="state-card">
+          <span class="spinner"></span>
+          <p>Fetching posts from JSONPlaceholder...</p>
+        </div>
+
+        <div id="errorState" class="state-card hidden">
+          <p>Unable to load posts. Please try again.</p>
+          <button id="retryButton" class="button button-secondary" type="button">
+            Retry
+          </button>
+        </div>
+
+        <div id="emptyState" class="state-card hidden">
+          <p>No posts matched your search.</p>
+        </div>
+
+        <div id="postGrid" class="post-grid" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="postDialog" class="post-dialog">
+    <div class="dialog-header">
+      <div>
+        <p class="eyebrow">Post details</p>
+        <h2 id="dialogTitle">Post</h2>
+      </div>
+      <button id="closeDialogButton" class="icon-button" type="button" aria-label="Close dialog">
+        ×
+      </button>
+    </div>
+
+    <p id="dialogBody" class="dialog-body"></p>
+
+    <div class="dialog-footer">
+      <span id="dialogMeta" class="post-meta"></span>
+      <a id="dialogEditLink" class="button button-primary" href="./create.html">
+        Edit post
+      </a>
+    </div>
+  </dialog>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
